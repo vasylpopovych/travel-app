@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Layout from "../../Layout";
+import Layout from "../../layout/Layout";
 
 const TripPage = () => {
     const { tripId } = useParams();
