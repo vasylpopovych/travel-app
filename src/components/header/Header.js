@@ -34,7 +34,7 @@ const Header = () => {
                     <ul className={styles.nav_header__list}>
                         {isAuthorization ? null : (
                             <>
-                                <ProfileNavButton /> <BookingsNavButton />
+                                <BookingsNavButton /> <ProfileNavButton />
                             </>
                         )}
                     </ul>
