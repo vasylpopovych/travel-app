@@ -11,13 +11,13 @@ import styles from "./header.module.css";
 
 const Header = () => {
     let location = useLocation();
-    const [isAuthorization, setIsAuthorization] = useState(false);
+    const [isAuthorizationPages, setIsAuthorizationPages] = useState(false);
     useEffect(() => {
         if (
             location.pathname === SIGN_IN_PATH ||
             location.pathname === SIGN_UP_PATH
         )
-            setIsAuthorization(true);
+            setIsAuthorizationPages(true);
     }, []);
 
     return (
@@ -32,7 +32,7 @@ const Header = () => {
                 </Link>
                 <nav data-test-id="header-nav" className={styles.header__nav}>
                     <ul className={styles.nav_header__list}>
-                        {isAuthorization ? null : (
+                        {isAuthorizationPages ? null : (
                             <>
                                 <BookingsNavButton /> <ProfileNavButton />
                             </>
