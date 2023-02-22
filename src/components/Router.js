@@ -5,16 +5,23 @@ import BookingsPage from "./pages/bookingsPage/BookingsPage";
 import SignInPage from "./pages/signInPage/SignInPage";
 import SignUpPage from "./pages/signUpPage/SignUpPage";
 import TripPage from "./pages/tripPage/TripPage";
+import {
+    BOOKINGS_PATH,
+    HOME_PAGE_PATH,
+    SIGN_IN_PATH,
+    SIGN_UP_PATH,
+    TRIP_PATH,
+} from "../constants/paths";
 
 const Router = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<MainPage />} />
-                <Route path="/sign-up" element={<SignUpPage />} />
-                <Route path="/sign-in" element={<SignInPage />} />
-                <Route path="/trip/:tripId" element={<TripPage />} />
-                <Route path="/bookings" element={<BookingsPage />} />
+                <Route path={HOME_PAGE_PATH} element={<MainPage />} />
+                <Route path={SIGN_UP_PATH} element={<SignUpPage />} />
+                <Route path={SIGN_IN_PATH} element={<SignInPage />} />
+                <Route path={TRIP_PATH} element={<TripPage />} />
+                <Route path={BOOKINGS_PATH} element={<BookingsPage />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </>
