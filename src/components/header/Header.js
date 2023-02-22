@@ -1,22 +1,45 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { SIGN_IN_PATH, SIGN_UP_PATH } from "../../constants/paths";
+import { useLocation, Link } from "react-router-dom";
+import {
+    HOME_PAGE_PATH,
+    SIGN_IN_PATH,
+    SIGN_UP_PATH,
+} from "../../constants/paths";
+import BookingsNavButton from "../UI/bookingsNavButtton/BookingsNavButton";
+import ProfileNavButton from "../UI/profileNavButton/ProfileNavButton";
+import styles from "./header.module.css";
 
 const Header = () => {
     let location = useLocation();
-    const [isLogin, setIsLogin] = useState(false);
+    const [isAuthorization, setIsAuthorization] = useState(false);
     useEffect(() => {
         if (
             location.pathname === SIGN_IN_PATH ||
             location.pathname === SIGN_UP_PATH
         )
-            setIsLogin(true);
+            setIsAuthorization(true);
     }, []);
 
     return (
-        <header>
-            Header
-            {isLogin ? <button>one</button> : null}
+        <header className={styles.header}>
+            <div className={styles.header__inner}>
+                <Link
+                    data-test-id="header-logo"
+                    className={styles.header__logo}
+                    to={HOME_PAGE_PATH}
+                >
+                    Travel App
+                </Link>
+                <nav data-test-id="header-nav" className={styles.header__nav}>
+                    <ul className={styles.nav_header__list}>
+                        {isAuthorization ? null : (
+                            <>
+                                <ProfileNavButton /> <BookingsNavButton />
+                            </>
+                        )}
+                    </ul>
+                </nav>
+            </div>
         </header>
     );
 };
