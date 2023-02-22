@@ -1,7 +1,7 @@
-import React from "react";
+import Layout from "../../layout/Layout";
 
 const BookingsPage = () => {
-    return <div>BookingsPage</div>;
+    return <Layout>BookingsPage</Layout>;
 };
 
 export default BookingsPage;

@@ -1,7 +1,7 @@
-import React from "react";
+import Layout from "../../layout/Layout";
 
 const SignInPage = () => {
-    return <div>SignInPage</div>;
+    return <Layout>SignInPage</Layout>;
 };
 
 export default SignInPage;

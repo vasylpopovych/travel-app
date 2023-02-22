@@ -1,9 +1,7 @@
-import React from 'react'
+import Layout from "../../layout/Layout";
 
 const SignUpPage = () => {
-  return (
-    <div>SignUpPage</div>
-  )
-}
+    return <Layout>SignUpPage</Layout>;
+};
 
-export default SignUpPage
+export default SignUpPage;
