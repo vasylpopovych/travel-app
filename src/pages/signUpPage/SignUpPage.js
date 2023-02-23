@@ -1,56 +1,90 @@
+import { useState } from "react";
+import { getValidationForm } from "../../helpers/getValidationForm";
 import Layout from "../../components/layout/Layout";
+import Button from "../../components/UI/button/Button";
+import Input from "../../components/UI/input/Input";
+import { Link, useNavigate } from "react-router-dom";
+import { HOME_PAGE_PATH, SIGN_IN_PATH } from "../../constants/paths";
 
 const SignUpPage = () => {
+    const [fullName, setFullName] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [isDataValid, setIsDataValid] = useState(null);
+    const navigate = useNavigate();
+
+    const handleFullNameData = (data) => {
+        setFullName(data);
+    };
+
+    const handleEmailData = (data) => {
+        setEmail(data);
+    };
+
+    const handlePasswordData = (data) => {
+        setPassword(data);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (getValidationForm(fullName, email, password)) {
+            setIsDataValid(true);
+            navigate(HOME_PAGE_PATH);
+        } else {
+            setIsDataValid(false);
+        }
+    };
+
     return (
         <Layout>
             <h1 className="visually-hidden">Travel App</h1>
-            <form className="sign-up-form" autoComplete="off">
+            <form
+                onSubmit={handleSubmit}
+                className="sign-up-form"
+                autoComplete="off"
+            >
                 <h2 className="sign-up-form__title">Sign Up</h2>
-                <label className="input">
-                    <span className="input__heading">Full name</span>
-                    <input
-                        data-test-id="auth-full-name"
-                        name="full-name"
-                        type="text"
-                        required
-                    />
-                </label>
-                <label className="input">
-                    <span className="input__heading">Email</span>
-                    <input
-                        data-test-id="auth-email"
-                        name="email"
-                        type="email"
-                        required
-                    />
-                </label>
-                <label className="input">
-                    <span className="input__heading">Password</span>
-                    <input
-                        data-test-id="auth-password"
-                        name="password"
-                        type="password"
-                        autoComplete="new-password"
-                        required
-                    />
-                </label>
-                <button
+                <Input
+                    onInputData={handleFullNameData}
+                    labelName={"Full name"}
+                    data-test-id="auth-full-name"
+                    name="full-name"
+                    type="text"
+                    required
+                />
+                <Input
+                    onInputData={handleEmailData}
+                    labelName={"Email"}
+                    data-test-id="auth-email"
+                    name="email"
+                    type="email"
+                    required
+                />
+                <Input
+                    onInputData={handlePasswordData}
+                    labelName={"Password"}
+                    data-test-id="auth-password"
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                />
+                <Button
                     data-test-id="auth-submit"
                     className="button"
                     type="submit"
-                >
-                    Sign Up
-                </button>
+                />
             </form>
+
             <span>
                 Already have an account?
-                <a
+                <Link
                     data-test-id="auth-sign-in-link"
-                    href="./sign-in.html"
+                    to={SIGN_IN_PATH}
                     className="sign-up-form__link"
                 >
                     Sign In
-                </a>
+                </Link>
             </span>
         </Layout>
     );
