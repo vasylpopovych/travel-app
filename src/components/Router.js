@@ -1,10 +1,10 @@
 import { Route } from "react-router";
 import { Routes, Navigate } from "react-router-dom";
-import MainPage from "./pages/mainPage/MainPage";
-import BookingsPage from "./pages/bookingsPage/BookingsPage";
-import SignInPage from "./pages/signInPage/SignInPage";
-import SignUpPage from "./pages/signUpPage/SignUpPage";
-import TripPage from "./pages/tripPage/TripPage";
+import MainPage from "../pages/mainPage/MainPage";
+import BookingsPage from "../pages/bookingsPage/BookingsPage";
+import SignInPage from "../pages/signInPage/SignInPage";
+import SignUpPage from "../pages/signUpPage/SignUpPage";
+import TripPage from "../pages/tripPage/TripPage";
 import {
     BOOKINGS_PATH,
     HOME_PAGE_PATH,

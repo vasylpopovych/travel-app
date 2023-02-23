@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Layout from "../../layout/Layout";
+import Layout from "../../components/layout/Layout";
 
 const MainPage = () => {
     return (
