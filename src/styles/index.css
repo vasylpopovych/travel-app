@@ -109,3 +109,15 @@ main {
 *::after {
   box-sizing: border-box;
 }
+
+/* animations */
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
