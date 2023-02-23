@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import styles from "./button.module.css";
-const Button = ({ ...args }) => {
+const Button = ({ children, ...args }) => {
     return (
         <button className={styles.button} {...args}>
-            Sign Up
+            {children}
         </button>
     );
 };

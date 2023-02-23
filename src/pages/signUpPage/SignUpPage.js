@@ -27,7 +27,7 @@ const SignUpPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (getValidationForm(fullName, email, password))
+        if (getValidationForm(email, password, fullName))
             navigate(HOME_PAGE_PATH);
     };
 
@@ -66,7 +66,10 @@ const SignUpPage = () => {
                         autoComplete="new-password"
                         required
                     />
-                    <Button data-test-id="auth-submit" type="submit" />
+                    <Button data-test-id="auth-submit" type="submit">
+                        {" "}
+                        Sign Up
+                    </Button>
                 </form>
                 <span>
                     Already have an account?
