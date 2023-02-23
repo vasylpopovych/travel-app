@@ -27,14 +27,14 @@ const SignInPage = () => {
 
     return (
         <Layout>
-            <main className="sign-in-page">
+            <main className={styles.sign_in_page}>
                 <h1 className="visually-hidden">Travel App</h1>
                 <form
                     onSubmit={handleSubmit}
-                    className="sign-in-form"
+                    className={styles.sign_in_form}
                     autoComplete="off"
                 >
-                    <h2 className="sign-in-form__title">Sign In</h2>
+                    <h2 className={styles.sign_in_form__title}>Sign In</h2>
 
                     <Input
                         onInputData={handleEmailData}
@@ -62,7 +62,7 @@ const SignInPage = () => {
                     <Link
                         data-test-id="auth-sign-up-link"
                         to={SIGN_UP_PATH}
-                        className="sign-in-form__link"
+                        className={styles.sign_in_form__link}
                     >
                         Sign Up
                     </Link>
