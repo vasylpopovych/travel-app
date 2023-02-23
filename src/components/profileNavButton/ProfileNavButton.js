@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { SIGN_IN_PATH } from "../../../constants/paths";
-import userImg from "../../../assets/user.svg";
+import { SIGN_IN_PATH } from "../../constants/paths";
+import userImg from "../../assets/user.svg";
 import styles from "./profileNavButton.module.css";
 
 const ProfileNavButton = () => {

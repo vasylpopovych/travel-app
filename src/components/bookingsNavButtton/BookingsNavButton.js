@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { BOOKINGS_PATH } from "../../../constants/paths";
+import { BOOKINGS_PATH } from "../../constants/paths";
 import styles from "./bookingsNavButton.module.css";
-import briefcaseImg from "../../../assets/briefcase.svg";
+import briefcaseImg from "../../assets/briefcase.svg";
 
 const BookingsNavButton = () => {
     return (
