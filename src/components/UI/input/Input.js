@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import styles from "./input.module.css";
 
 const Input = ({ onInputData, labelName, ...args }) => {
     const handleInputChange = (event) => {
@@ -6,8 +7,8 @@ const Input = ({ onInputData, labelName, ...args }) => {
     };
 
     return (
-        <label className="input">
-            <span className="input__heading">{labelName}</span>
+        <label className={styles.input}>
+            <span className={styles.input__heading}>{labelName}</span>
             <input onChange={handleInputChange} {...args} />
         </label>
     );

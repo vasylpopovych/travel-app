@@ -66,11 +66,7 @@ const SignUpPage = () => {
                         autoComplete="new-password"
                         required
                     />
-                    <Button
-                        data-test-id="auth-submit"
-                        className="button"
-                        type="submit"
-                    />
+                    <Button data-test-id="auth-submit" type="submit" />
                 </form>
                 <span>
                     Already have an account?
