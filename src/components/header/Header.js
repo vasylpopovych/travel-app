@@ -5,8 +5,8 @@ import {
     SIGN_IN_PATH,
     SIGN_UP_PATH,
 } from "../../constants/paths";
-import BookingsNavButton from "../bookingsNavButtton/BookingsNavButton";
-import ProfileNavButton from "../profileNavButton/ProfileNavButton";
+import BookingsNavButton from "./bookingsNavButtton/BookingsNavButton";
+import ProfileNavButton from "./profileNavButton/ProfileNavButton";
 import styles from "./header.module.css";
 
 const Header = () => {
