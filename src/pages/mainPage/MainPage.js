@@ -6,6 +6,7 @@ import { tripsData } from "../../helpers/mockData";
 import styles from "./mainPage.module.css";
 
 const MainPage = () => {
+    // eslint-disable-next-line no-unused-vars
     const [trips, setTrips] = useState(tripsData);
     const [titleData, setTitleData] = useState("");
     const [durationData, setDurationData] = useState("");
