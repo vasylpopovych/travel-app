@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import TripCard from "../../components/tripCard/TripCard";
 import TripsFilter from "../../components/tripsFilter/TripsFilter";
@@ -6,54 +6,48 @@ import { tripsData } from "../../helpers/mockData";
 import styles from "./mainPage.module.css";
 
 const MainPage = () => {
-    const [titleData, setTitleData] = useState(null);
-    const [durationData, setDurationData] = useState(null);
-    const [levelData, setLevelData] = useState(null);
-    const [isFiltering, setIsFiltering] = useState(false);
+    const [trips, setTrips] = useState(tripsData);
+    const [titleData, setTitleData] = useState("");
+    const [durationData, setDurationData] = useState("");
+    const [levelData, setLevelData] = useState("");
 
     //get data from filters
     const handleSearchTitle = (data) => {
         setTitleData(data);
-        console.log(data);
     };
 
     const handleSearchDuration = (data) => {
         setDurationData(data);
-        console.log(data);
     };
 
     const handleSearchLevel = (data) => {
         setLevelData(data);
-        console.log(data);
     };
 
-    /* logic of filering. When one of filters starts - filter data by all 3 filters 
-    problem: коли використовую функцію як аргумент для методу filter, то коли очищую поле вводу всі картки зникають
-    Це тому що не запускається фультрація з пустою строкою
-    */
-    const trips = tripsData;
-    const filterByTitle = (trip) => {
-        if (titleData) {
-            return trip.title.toLowerCase().includes(titleData);
-        } else {
-            trip;
+    //firltering trips
+
+    const filterByDuration = (trip) => {
+        if (durationData.length === 1) {
+            if (trip.duration >= durationData[0]) return true;
+        } else if (durationData.length === 2) {
+            if (
+                trip.duration >= durationData[0] &&
+                trip.duration <= durationData[1]
+            )
+                return true;
         }
     };
 
-    const filterByLevel = (trip) => {
-        if (levelData) {
-            return trip.level === levelData;
-        } else {
-            trip;
+    const filteredTrips = trips.filter((trip) => {
+        if (
+            trip.title.toLowerCase().includes(titleData) &&
+            (levelData === "" || trip.level === levelData) &&
+            (durationData === "" || filterByDuration(trip))
+        ) {
+            return true;
         }
-    };
-
-    useEffect(() => {
-        if (titleData || durationData || levelData) {
-            console.log("effect works");
-            setIsFiltering(true);
-        }
-    }, [titleData, durationData, levelData]);
+        return false;
+    });
 
     return (
         <Layout>
@@ -66,20 +60,10 @@ const MainPage = () => {
                 />
                 <section className={styles.trips}>
                     <h2 className="visually-hidden">Trips List</h2>
-                    {/* {trips.map((trip) => (
-                        <TripCard key={trip.id} tripData={trip} />
-                    ))} */}
                     <ul className={styles.trip_list}>
-                        {isFiltering
-                            ? trips
-                                  .filter(filterByTitle)
-                                  .filter(filterByLevel)
-                                  .map((trip) => (
-                                      <TripCard key={trip.id} tripData={trip} />
-                                  ))
-                            : trips.map((trip) => (
-                                  <TripCard key={trip.id} tripData={trip} />
-                              ))}
+                        {filteredTrips.map((trip) => (
+                            <TripCard key={trip.id} tripData={trip} />
+                        ))}
                     </ul>
                 </section>
             </main>

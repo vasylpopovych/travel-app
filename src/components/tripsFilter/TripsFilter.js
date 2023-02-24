@@ -11,7 +11,8 @@ const TripsFilter = ({ onSearch, onSelectLevel, onSelectDuration }) => {
     };
 
     const handleSelectDuration = (event) => {
-        onSelectDuration(event.target.value);
+        const duration = event.target.value.replace("_x", "").split("_");
+        onSelectDuration(duration);
     };
     return (
         <section className={styles.trips_filter}>
