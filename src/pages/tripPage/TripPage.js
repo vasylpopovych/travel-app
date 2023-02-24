@@ -1,11 +1,22 @@
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
+import TripPopup from "../../components/tripModal/TripPopup";
+import { HOME_PAGE_PATH } from "../../constants/paths";
 import { tripsData } from "../../helpers/mockData";
 import styles from "./tripPage.module.css";
 
 const TripPage = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const { tripId } = useParams();
+    const navigate = useNavigate();
     const currentTrip = tripsData.filter((trip) => trip.id === tripId);
+    const handleClick = () => {
+        setIsOpen(true);
+    };
+
+    if (!currentTrip) navigate(HOME_PAGE_PATH);
+
     return (
         <Layout>
             <main className={styles.trip_page}>
@@ -57,6 +68,7 @@ const TripPage = () => {
                             </strong>
                         </div>
                         <button
+                            onClick={handleClick}
                             data-test-id="trip-details-button"
                             className={`${styles.trip__button} button`}
                         >
@@ -65,6 +77,7 @@ const TripPage = () => {
                     </div>
                 </div>
             </main>
+            {isOpen && <TripPopup tripData={currentTrip} onOpen={setIsOpen} />}
         </Layout>
     );
 };
