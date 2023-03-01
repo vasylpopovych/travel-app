@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BOOKINGS_PATH } from "../../constants/paths";
+import { validateDate } from "../../helpers/validateDate";
 import Button from "../UI/button/Button";
 import Input from "../UI/input/Input";
 import styles from "./tripPopup.module.css";
@@ -15,46 +16,31 @@ const TripPopup = ({ tripData, onOpen }) => {
 
     const navigate = useNavigate();
 
-    const addToSessionStorage = (item) => {
-        let storageData = [];
-        if (sessionStorage.trips) {
-            storageData = JSON.parse(sessionStorage.getItem("trips"));
-            storageData.push(item);
-            sessionStorage.setItem("trips", JSON.stringify(storageData));
-        } else {
-            let arr = [item];
-            sessionStorage.setItem("trips", JSON.stringify(arr));
-        }
+    const validateModal = () => {
+        if (!dateWarning && !guestsWarning) return true;
     };
 
     const handleGuests = (e) => {
-        if (guestsWarning) {
-            setGuestsWarning(false);
-        }
+        if (guestsWarning) setGuestsWarning(false);
         const guests = e.target.value;
         if (+guests > 10 || +guests < 1) {
             setGuestsWarning(true);
-        } else {
-            setTotalPrice(tripData[0].price * +guests);
         }
-
+        setTotalPrice(tripData[0].price * +guests);
         setGuests(guests);
     };
 
     const handleDate = (e) => {
-        if (dateWarning) {
-            setDateWarning(false);
+        if (dateWarning) setDateWarning(false);
+        if (!validateDate(e.target.value)) {
+            setDateWarning(true);
         }
         setDate(e.target.value);
-        console.log();
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!date) {
-            setDateWarning(true);
-        }
-        if (date && !dateWarning && !guestsWarning) {
+        if (validateModal()) {
             onOpen(false);
             addToSessionStorage({
                 id: tripData[0].id,
@@ -64,6 +50,18 @@ const TripPopup = ({ tripData, onOpen }) => {
                 title: tripData[0].title,
             });
             navigate(BOOKINGS_PATH);
+        }
+    };
+
+    const addToSessionStorage = (item) => {
+        let storageData = [];
+        if (sessionStorage.trips) {
+            storageData = JSON.parse(sessionStorage.getItem("trips"));
+            storageData.push(item);
+            sessionStorage.setItem("trips", JSON.stringify(storageData));
+        } else {
+            let arr = [item];
+            sessionStorage.setItem("trips", JSON.stringify(arr));
         }
     };
 
@@ -122,7 +120,7 @@ const TripPopup = ({ tripData, onOpen }) => {
                         />
                         {dateWarning && (
                             <span className={styles.warning}>
-                                Date filed is required!
+                                Date should be no later than tomorrow!
                             </span>
                         )}
                         <Input
