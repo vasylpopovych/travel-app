@@ -1,4 +1,6 @@
 # Travel App
 
-## Delpoyed here - [link](https://astounding-choux-0e74f1.netlify.app/)
+### Tech stack: React, React Router Dom, Classnames Lib, 
+
+### You can check demo - [here](https://travel-app-vp.netlify.app/)
 
