@@ -55,13 +55,13 @@ const TripPopup = ({ tripData, onOpen }) => {
 
     const addToSessionStorage = (item) => {
         let storageData = [];
-        if (sessionStorage.trips) {
-            storageData = JSON.parse(sessionStorage.getItem("trips"));
+        if (sessionStorage.bookings) {
+            storageData = JSON.parse(sessionStorage.getItem("bookings"));
             storageData.push(item);
-            sessionStorage.setItem("trips", JSON.stringify(storageData));
+            sessionStorage.setItem("bookings", JSON.stringify(storageData));
         } else {
             let arr = [item];
-            sessionStorage.setItem("trips", JSON.stringify(arr));
+            sessionStorage.setItem("bookings", JSON.stringify(arr));
         }
     };
 

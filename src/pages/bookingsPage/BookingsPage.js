@@ -9,8 +9,10 @@ const BookingsPage = () => {
     const [bookingId, setBookingId] = useState(null);
 
     useEffect(() => {
-        if (sessionStorage.trips) {
-            const dataFromStorage = JSON.parse(sessionStorage.getItem("trips"));
+        if (sessionStorage.bookings) {
+            const dataFromStorage = JSON.parse(
+                sessionStorage.getItem("bookings")
+            );
             const newData = bookings.concat(dataFromStorage);
             setBookings(newData);
         }
