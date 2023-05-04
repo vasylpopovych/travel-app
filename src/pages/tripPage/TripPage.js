@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import TripPopup from "../../components/tripModal/TripPopup";
@@ -6,14 +7,19 @@ import { HOME_PAGE_PATH } from "../../constants/paths";
 import { tripsData } from "../../helpers/mockData";
 import styles from "./tripPage.module.css";
 
-const TripPage = () => {
+const TripPage = ({ bookedTripData }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [bookedTrip, getBookedTrip] = useState(null);
     const { tripId } = useParams();
     const navigate = useNavigate();
     const currentTrip = tripsData.filter((trip) => trip.id === tripId);
     const handleClick = () => {
         setIsOpen(true);
     };
+
+    useEffect(() => {
+        bookedTripData(bookedTrip);
+    }, [bookedTrip]);
 
     if (!currentTrip) navigate(HOME_PAGE_PATH);
 
@@ -77,7 +83,13 @@ const TripPage = () => {
                     </div>
                 </div>
             </main>
-            {isOpen && <TripPopup tripData={currentTrip} onOpen={setIsOpen} />}
+            {isOpen && (
+                <TripPopup
+                    tripData={currentTrip}
+                    bookedTrip={getBookedTrip}
+                    onOpen={setIsOpen}
+                />
+            )}
         </Layout>
     );
 };

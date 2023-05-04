@@ -1,20 +1,16 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { BOOKINGS_PATH } from "../../constants/paths";
 import { validateDate } from "../../helpers/validateDate";
 import Button from "../UI/button/Button";
 import Input from "../UI/input/Input";
 import styles from "./tripPopup.module.css";
 
-const TripPopup = ({ tripData, onOpen }) => {
+const TripPopup = ({ tripData, onOpen, bookedTrip }) => {
     const [guests, setGuests] = useState("1");
     const [totalPrice, setTotalPrice] = useState(tripData[0].price);
     const [date, setDate] = useState("");
     const [dateWarning, setDateWarning] = useState(false);
     const [guestsWarning, setGuestsWarning] = useState(false);
-
-    const navigate = useNavigate();
 
     const validateModal = () => {
         if (!dateWarning && !guestsWarning) return true;
@@ -42,26 +38,15 @@ const TripPopup = ({ tripData, onOpen }) => {
         e.preventDefault();
         if (validateModal()) {
             onOpen(false);
-            addToSessionStorage({
+            bookedTrip({
                 id: tripData[0].id,
                 guests: guests,
-                price: totalPrice,
                 date: date,
-                title: tripData[0].title,
+                totalPrice: totalPrice,
+                trip: {
+                    title: tripData[0].title,
+                },
             });
-            navigate(BOOKINGS_PATH);
-        }
-    };
-
-    const addToSessionStorage = (item) => {
-        let storageData = [];
-        if (sessionStorage.bookings) {
-            storageData = JSON.parse(sessionStorage.getItem("bookings"));
-            storageData.push(item);
-            sessionStorage.setItem("bookings", JSON.stringify(storageData));
-        } else {
-            let arr = [item];
-            sessionStorage.setItem("bookings", JSON.stringify(arr));
         }
     };
 

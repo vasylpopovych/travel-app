@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route } from "react-router";
 import { Routes, Navigate } from "react-router-dom";
 import MainPage from "../pages/mainPage/MainPage";
@@ -14,14 +15,21 @@ import {
 } from "../constants/paths";
 
 const Router = () => {
+    const [bookedTrip, getBookedTrip] = useState(null);
     return (
         <>
             <Routes>
                 <Route path={HOME_PAGE_PATH} element={<MainPage />} />
                 <Route path={SIGN_UP_PATH} element={<SignUpPage />} />
                 <Route path={SIGN_IN_PATH} element={<SignInPage />} />
-                <Route path={TRIP_PATH} element={<TripPage />} />
-                <Route path={BOOKINGS_PATH} element={<BookingsPage />} />
+                <Route
+                    path={TRIP_PATH}
+                    element={<TripPage bookedTripData={getBookedTrip} />}
+                />
+                <Route
+                    path={BOOKINGS_PATH}
+                    element={<BookingsPage bookedTrip={bookedTrip} />}
+                />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </>

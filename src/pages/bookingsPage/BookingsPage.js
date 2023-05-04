@@ -1,22 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import BookingCard from "../../components/bookingCard/BookingCard";
 import Layout from "../../components/layout/Layout";
 import { bookingsData } from "../../helpers/mockData";
 import styles from "./bookingsPage.module.css";
 
-const BookingsPage = () => {
+const BookingsPage = ({ bookedTrip }) => {
     const [bookings, setBookings] = useState(bookingsData);
     const [bookingId, setBookingId] = useState(null);
-
-    useEffect(() => {
-        if (sessionStorage.bookings) {
-            const dataFromStorage = JSON.parse(
-                sessionStorage.getItem("bookings")
-            );
-            const newData = bookings.concat(dataFromStorage);
-            setBookings(newData);
-        }
-    }, []);
 
     const handleRemove = (id) => {
         setBookingId(id);
@@ -34,6 +25,12 @@ const BookingsPage = () => {
         );
         setBookings(filteredBookings);
     }, [bookingId]);
+
+    useEffect(() => {
+        if (bookedTrip) {
+            setBookings([...bookings, bookedTrip]);
+        }
+    }, []);
     return (
         <Layout>
             <main className={styles.bookings_page}>
