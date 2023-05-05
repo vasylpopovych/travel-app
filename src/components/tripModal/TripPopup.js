@@ -13,7 +13,7 @@ const TripPopup = ({ tripData, onOpen, bookedTrip }) => {
     const [guestsWarning, setGuestsWarning] = useState(false);
 
     const validateModal = () => {
-        if (!dateWarning && !guestsWarning) return true;
+        if (!dateWarning && !guestsWarning && date.length > 1) return true;
     };
 
     const handleGuests = (e) => {
